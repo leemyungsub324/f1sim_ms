@@ -1,0 +1,6 @@
+source_map: /home/myungsub/f1sim_C/f1tenth_gym_ros/maps/cruise_map.yaml
+obstacles:
+- {type: circle, x: 5.711173985158069, y: 13.087821181920873, radius: 0.25}
+- {type: circle, x: 1.8930233638846374, y: 14.77491099132076, radius: 0.25}
+- {type: circle, x: 10.417266611378814, y: 13.472596050731376, radius: 0.25}
+- {type: circle, x: 11.364404749989276, y: 3.0540765260162743, radius: 0.25}

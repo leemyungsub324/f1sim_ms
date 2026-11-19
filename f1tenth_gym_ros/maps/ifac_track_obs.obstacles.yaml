@@ -1,0 +1,6 @@
+source_map: /home/myungsub/f1sim_C/f1tenth_gym_ros/maps/ifac_track.yaml
+obstacles:
+- {type: circle, x: -8.808165979381444, y: -0.3420873711340211, radius: 0.25}
+- {type: circle, x: -18.270150515463918, y: 4.92047706185567, radius: 0.25}
+- {type: circle, x: -17.401915979381442, y: 2.74103118556701, radius: 0.25}
+- {type: circle, x: -4.94540824742268, y: 2.6878739690721654, radius: 0.25}

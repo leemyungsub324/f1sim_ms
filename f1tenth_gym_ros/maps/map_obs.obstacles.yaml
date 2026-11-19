@@ -1,0 +1,5 @@
+source_map: /home/myungsub/f1sim_C/f1tenth_gym_ros/maps/map.yaml
+obstacles:
+- {type: rect, x: -0.6197856899781229, y: -0.054961171625892646, width: 0.2, height: 0.2}
+- {type: rect, x: 7.919149351559263, y: 4.406196727626293, width: 0.2, height: 0.2}
+- {type: rect, x: -10.239157410240647, y: 5.591191794615153, width: 0.2, height: 0.2}
