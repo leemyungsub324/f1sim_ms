@@ -1,0 +1,24 @@
+# 가상 카메라(fake_camera) 설정. 팀 레포(2026AUTOLAB_team2)의 실제 카메라 값과 맞춘다.
+# 실제 차에서 값이 바뀌면 여기도 같이 바꾼다.
+#   K, D           : bringup/config/ost.yaml (1920x1200 풀해상도 기준. 노드가 width/height 로 줄인다)
+#   cam_x/z, pitch : bringup/config/safe.yaml 의 lane_detector (후륜축 기준, pitch 는 아래가 +)
+#   width/height   : camera.yaml 의 비닝 결과 (지금 480x300)
+fake_camera:
+  ros__parameters:
+    odom_topic: /ego_racecar/odom
+    image_topic: /flir_camera/image_raw
+    info_topic: /flir_camera/camera_info
+    frame_id: camera
+    width: 480
+    height: 300
+    calib_width: 1920
+    calib_height: 1200
+    K: [1044.310885, 0.0, 967.285496, 0.0, 1040.725825, 592.034680, 0.0, 0.0, 1.0]
+    D: [-0.326346, 0.114363, -0.000872, -0.000147, -0.019324]
+    cam_x: 0.236
+    cam_y: 0.0
+    cam_z: 0.177
+    pitch_deg: 6.0
+    solid_scale: 0.5    # 덕트·상자를 그리는 해상도 배율 (0.5 = 240x150). 낮추면 빨라진다
+    noise: 2.0          # 화소 잡음 표준편차
+    max_range: 12.0     # m. 이보다 먼 바닥은 배경색
