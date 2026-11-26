@@ -31,11 +31,26 @@ colcon build --symlink-install --base-paths f1tenth_gym_ros
 
 ## 2. 터미널 준비
 
-새 터미널을 열 때마다 아래 두 줄을 실행해요.
+새 터미널을 열 때마다 아래 두 줄을 실행해요. 안 하면 `Package 'f1tenth_gym_ros' not found` 가 나와요.
+
+bash 를 쓸 때:
 
 ```bash
 source /opt/ros/humble/setup.bash
 source ~/f1sim_ms/install/setup.bash
+```
+
+zsh 를 쓸 때는 `.bash` 대신 `.zsh` 파일을 써요. zsh 에서 `setup.bash` 를 source 하면 제대로 안 잡혀요.
+
+```zsh
+source /opt/ros/humble/setup.zsh
+source ~/f1sim_ms/install/setup.zsh
+```
+
+매번 치기 번거로우면 `~/.zshrc` (bash 면 `~/.bashrc`) 에 두 줄을 넣어 두거나, 별칭을 만들어 둬요.
+
+```zsh
+alias sc='source install/setup.zsh'   # ~/f1sim_ms 에서 sc 만 치면 돼요
 ```
 
 ## 3. autolab 시연 트랙 실행 (3D 카메라 포함)
@@ -159,7 +174,8 @@ RViz 위쪽의 **2D Pose Estimate**를 누르고 맵 위를 클릭한 채 끌어
 
 | 증상 | 해결 |
 | --- | --- |
-| `Package 'f1tenth_gym_ros' not found` | `source ~/f1sim_ms/install/setup.bash`를 했는지 확인해요 |
+| `Package 'f1tenth_gym_ros' not found` | 워크스페이스를 source 했는지 확인해요. zsh 는 `install/setup.zsh` 예요 |
+| RViz 카메라 창이 `No Image` 이고 3D 트랙이 안 보여요. 로그에 `numpy.core.multiarray failed to import`, `_ARRAY_API not found` | apt 의 OpenCV(`python3-opencv`)는 NumPy 1.x 용인데 이 저장소는 NumPy 2.x 를 써서 `import cv2` 가 실패해요. `fake_camera`, `track_markers` 가 바로 죽어요. NumPy 2 용 OpenCV 를 설치해요: `pip3 install --user "opencv-python-headless>=4.10"` |
 | `executable 'fake_camera' not found` | 새 노드가 등록되지 않은 상태예요. `colcon build`를 다시 해요 |
 | 카메라 영상이 끊기거나 느려요 | `camera_rate`나 `solid_scale`을 낮춰요 |
 | 팀 스택이 토픽을 못 받아요 | 두 터미널의 `ROS_DOMAIN_ID`가 같은지 확인해요 |
