@@ -1,0 +1,5 @@
+[build-system]
+# setup.py imports numpy at build time (numpy.get_include() for the C++
+# backend), so numpy must be present in pip's isolated build environment.
+requires = ["setuptools>=61", "wheel", "numpy>=2.0.0,<3.0.0"]
+build-backend = "setuptools.build_meta"
