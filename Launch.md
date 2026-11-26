@@ -20,6 +20,15 @@ cd ~/f1sim_ms
 sudo rosdep init && rosdep update
 ```
 
+### OpenCV 설치 (autolab 카메라용, 꼭 필요해요)
+
+`f110_gym`이 NumPy 2.x 를 설치하는데, apt 의 `python3-opencv`(4.5.4)는 NumPy 1.x 용이라 `import cv2` 가 실패해요. 그러면 `fake_camera`와 `track_markers`가 시작하자마자 죽어요. NumPy 2 와 맞는 OpenCV 를 사용자 영역에 설치해 두면 apt 버전보다 먼저 잡혀요.
+
+```bash
+pip3 install --user "opencv-python-headless>=4.10"
+python3 -c "import cv2, numpy; print(cv2.__version__, numpy.__version__)"   # 에러 없이 버전이 나오면 OK
+```
+
 ### 코드를 고친 뒤 다시 빌드
 
 새 노드를 추가했거나 `setup.py`를 바꿨으면 다시 빌드해요. `--symlink-install`로 빌드했다면 Python 코드, launch 파일, yaml만 바꿨을 때는 다시 빌드하지 않아도 돼요.
