@@ -9,7 +9,8 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    # ubuntu-latest (26.04) has no Python 3.9; 22.04 matches ROS 2 Humble
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
@@ -26,10 +27,13 @@ jobs:
     - name: Install
       run: |
         python -m pip install --upgrade pip
-        # gym 0.19.0's setup.py has an extras_require entry that setuptools>=66
-        # rejects, so build it with an older setuptools outside build isolation.
-        pip install "setuptools<66" wheel
-        pip install --no-build-isolation gym==0.19.0
+        # gym 0.19.0's setup.py has an invalid requirement ("opencv-python>=3.")
+        # that current setuptools/packaging reject. Patch the sdist, then install.
+        mkdir -p /tmp/gym && cd /tmp/gym
+        curl -sSL https://files.pythonhosted.org/packages/source/g/gym/gym-0.19.0.tar.gz | tar xz
+        sed -i 's/opencv-python>=3\./opencv-python>=3/' gym-0.19.0/setup.py
+        pip install ./gym-0.19.0
+        cd "$GITHUB_WORKSPACE"
         pip install -e .
 
     - name: Smoke test
