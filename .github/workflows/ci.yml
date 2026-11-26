@@ -26,6 +26,10 @@ jobs:
     - name: Install
       run: |
         python -m pip install --upgrade pip
+        # gym 0.19.0's setup.py has an extras_require entry that setuptools>=66
+        # rejects, so build it with an older setuptools outside build isolation.
+        pip install "setuptools<66" wheel
+        pip install --no-build-isolation gym==0.19.0
         pip install -e .
 
     - name: Smoke test
